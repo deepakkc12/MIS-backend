@@ -6,7 +6,6 @@ from datetime import datetime, timedelta
 from typing import Dict, Optional, Tuple
 from django.http import HttpRequest
 from ...Core import db
-from ...models.Models import SKUSales
 from ...utils.exceptions import AuthenticationError, InternalServerError
 from ...utils.contexts import propagate_errors
 from ...utils.helpers import get_current_date
@@ -14,8 +13,6 @@ from ...utils.helpers import get_current_date
 
 
 class DashBoard:
-
-    skuSales = SKUSales
 
 
     @classmethod

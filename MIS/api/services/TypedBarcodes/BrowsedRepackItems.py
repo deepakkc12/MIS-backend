@@ -16,7 +16,7 @@ class BrowsedRepackItems:
     @classmethod
     def count(cls):
 
-        query = """select Count(*) as cnt from POS_Audit_BrowsedRepackItems"""
+        query = """select Sum(cnt) as cnt from POS_Audit_BrowsedRepackItems"""
 
         result = db.get_data(query=query)
 

@@ -280,6 +280,16 @@ class DatabaseModel(BaseModel):
         except Exception as e:
             logger.error(f"Failed to list {cls.__name__}: {str(e)}")
             raise
+
+    @classmethod
+    def serialized_list(cls: Type[T],connection=Database) -> List[T]:
+        try:
+            query = f"SELECT * FROM {cls.get_table_name()} WITH (NOLOCK)"
+            rows = connection.get_data(query=query)
+            return rows
+        except Exception as e:
+            logger.error(f"Failed to list {cls.__name__}: {str(e)}")
+            raise
     
     @classmethod
     def find_by_id(cls: Type[T], id: Any,connection=Database) -> Optional[T]:
@@ -324,6 +334,31 @@ class DatabaseModel(BaseModel):
                 instance._is_new = False
                 instances.append(instance)
             return instances
+        except Exception as e:
+            logger.error(f"Failed to filter {cls.__name__}: {str(e)}")
+            raise
+
+    @classmethod
+    def serialized_filtered_list(cls: Type[T],connection=Database, **kwargs,) -> List[T]:
+        if not kwargs:
+            return cls.serialized_list(connection=connection)
+                    
+        where_clauses = []
+        values = []
+        
+        for field_name, value in kwargs.items():
+            if field_name in cls.get_fields():
+                where_clauses.append(f"{field_name} = ?")
+                values.append(value)
+            else:
+                logger.warning(f"Field '{field_name}' is not valid for {cls.__name__}")
+
+        where_clause = " AND ".join(where_clauses)
+        query = f"SELECT * FROM {cls.get_table_name()} WITH (NOLOCK) WHERE {where_clause}"
+
+        try:
+            rows = connection.get_data(query, values)
+            return rows
         except Exception as e:
             logger.error(f"Failed to filter {cls.__name__}: {str(e)}")
             raise

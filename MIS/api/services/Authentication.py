@@ -15,10 +15,8 @@ logger = logging.getLogger(__name__)
 
 
 
-
-
-
 class AuthCookieHandler:
+
     """Handles authentication cookie operations."""
     
     COOKIE_NAME = 'auth_token'
@@ -290,9 +288,3 @@ class AuthUser:
             else:
                 logger.warning(f"Password change failed for user code: {user_code}")
                 return False
-    
-    # def get_employee(self)->Optional[Employee]:
-    #     employee = Employee.filter(UserCode = self.code)
-    #     if not employee :
-    #         return None
-    #     return employee[0]

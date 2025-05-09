@@ -21,6 +21,11 @@ class CRMMatrices(APIView):
 
         return ResponseHandler.success(data=result)
     
+class GEtNewMonthCustomers(APIView):
+    def get(self,request):
+        result = CRM.get_new_month_customers()
+
+        return ResponseHandler.success(data=result)
 
 class PriorityCustomersList(APIView):
     def get(self,request):
@@ -73,7 +78,7 @@ class CustomerMonthWiseSales(APIView):
 
 class CrmSegmentMetricsData(APIView):
     def get(self,request):
-        priority_customers = PriorityCustomers.count()
+        priority_customers = PriorityCustomers.get_top_priority_count()
         frequent_visitors = FrequentVisitors.count()
         npc_customers = NonPerformingCustomers.count()
         inactive_customers = InActiveCustomers.count()
@@ -148,7 +153,18 @@ class CRankings(APIView):
 
         return ResponseHandler.success(data=result)
     
+class LiveCustomerList(APIView):
+    def get(self,request):
+        level = request.GET.get('level',None)
+        result = LiveCustomers.list(level=level)
+        return ResponseHandler.success(data=result)
+    
+class GETTOPPriorityCustomers(APIView):
+    def get(self,request):
+        result = PriorityCustomers.get_top_priority_customers()
 
+        return ResponseHandler.success(data=result)
+    
 
 
 

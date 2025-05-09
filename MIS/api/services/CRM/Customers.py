@@ -32,10 +32,10 @@ class CRM:
     @classmethod
     def matrices_data(cls):
 
-        current_date = get_current_date()
+        current_date = cls.last_synced_date
 
-        prv_month_end_date = get_past_date(30)
-        prv_month_start_date = get_past_date(60)
+        prv_month_end_date = get_past_date(30,current_date)
+        prv_month_start_date = get_past_date(60,current_date)
 
 
 
@@ -53,7 +53,6 @@ class CRM:
         data = [prv_month_end_date,current_date,prv_month_start_date,prv_month_end_date]
 
         result = db.get_data(query=query,data=data)
-
 
         result = result[0] if result else None
 
@@ -77,6 +76,21 @@ class CRM:
         result['customerTrend']= trend
 
         return result
+    
+
+    @classmethod
+    def get_new_month_customers(cls):
+        current_date = cls.last_synced_date
+
+        prv_month_end_date = get_past_date(30,current_date)
+
+        query = """select AC.*,C.* from ActiveCustomers AC join Customers C ON C.Code = AC.CardHolderCode WHERE C.dot BETWEEN ? AND ? """
+
+        data = [prv_month_end_date,current_date]
+        result = db.get_data(query=query,data=data)
+        return result
+    
+
     
     @classmethod
     def get_segments_count(cls):

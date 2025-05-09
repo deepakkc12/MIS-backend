@@ -9,7 +9,10 @@ urlpatterns = [
     path('', include('MIS.api.urls.crm')),
     path('', include('MIS.api.urls.general')),
     path('', include('MIS.api.urls.sales')),
-
+    path('', include('MIS.api.urls.barcodes')),
     path('acc/', include('MIS.api.urls.Accountings')),
+    path('', include('MIS.api.urls.Inventory')),
+    path('', include('MIS.api.urls.salesLoss')),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -16,7 +16,7 @@ class BrowsedPrivateLabels:
     @classmethod
     def count(cls):
 
-        query = """select Count(*) as cnt from POS_Audit_BrowsedPrivateLabels"""
+        query = """select Sum(cnt) as cnt from POS_Audit_BrowsedPrivateLabels"""
 
         result = db.get_data(query=query)
 

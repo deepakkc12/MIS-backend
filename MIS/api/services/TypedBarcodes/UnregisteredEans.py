@@ -8,7 +8,7 @@ class UnregisteredEans:
     @classmethod
     def list(cls):
 
-        query = f"""SELECT * FROM POS_Audit_EAN_NotRegistred"""
+        query = "SELECT DISTINCT * FROM POS_Audit_EAN_NotRegistred order by MRP desc"
 
         result = db.get_data(query=query)
 
@@ -17,7 +17,7 @@ class UnregisteredEans:
     @classmethod
     def count(cls):
 
-        query = """select Count(*) as cnt from POS_Audit_EAN_NotRegistred"""
+        query = """SELECT COUNT(*) AS cnt FROM (SELECT DISTINCT * FROM POS_Audit_EAN_NotRegistred) AS subquery"""
 
         result = db.get_data(query=query)
 

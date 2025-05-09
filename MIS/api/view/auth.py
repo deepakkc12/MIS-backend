@@ -44,7 +44,7 @@ class Login(APIView):
                 "isAdmin": auth_user.is_admin,
                 "branchCode": auth_user.branch_code,
                 # "branchName": branch.Name,
-                # "branchPhone": branch.PhoneNo,
+                # "branchPhone": branch.PhoneNo,        
 
                 # "employee":{
                 #     'kotTypeCode':kot_type.Code if kot_type else None ,

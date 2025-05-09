@@ -1,5 +1,5 @@
 from django.urls import path
-from ..view.Accounts import GetAccountMatrics,GetExpenseAsIncomes,GetPendingCrNoteLsit,    GetCrNotRefundSummery,    GetCrNoteRefundDetails,    GetRangeAudits,GetBackDatedEntries
+from ..view.Accounts import GetAccountMatrics,GetExpenseAsIncomes,GetPendingCrNoteLsit,GetRoiDetails,    GetCrNotRefundSummery,    GetCrNoteRefundDetails,    GetRangeAudits,GetBackDatedEntries,GetPaymentTracks,GetOpexList
 
 urlpatterns = [
 
@@ -10,5 +10,8 @@ urlpatterns = [
     path('cr-note-refund-details/', GetCrNoteRefundDetails.as_view(), name='cr-note-refund-details'),
     path('range-audits/', GetRangeAudits.as_view(), name='range-audits'),
     path('back-dated-entreis/', GetBackDatedEntries.as_view(), name='back-dated-entries-list'),
-    
+    path('roi-list/', GetRoiDetails.as_view(), name='back-dated-entries-list'),
+    path('payment-tracks/', GetPaymentTracks.as_view(), name='back-dated-entries-list'),
+    path('opex-list/', GetOpexList.as_view(), name='back-dated-entries-list'),
+
 ]

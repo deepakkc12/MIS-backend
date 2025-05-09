@@ -28,6 +28,14 @@ class Model(DatabaseModel):
     @classmethod
     def find_by_id(cls, id, connection=db):
         return super().find_by_id(id, connection)
+    
+    @classmethod
+    def serialized_list(cls, connection=db):
+        return super().serialized_list(connection)
+    
+    @classmethod
+    def serialized_filtered_list(cls, connection=db, **kwargs):
+        return super().serialized_filtered_list(connection, **kwargs)
 
     @staticmethod
     def generate_tot():

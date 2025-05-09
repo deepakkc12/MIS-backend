@@ -3,83 +3,216 @@ from typing import Optional
 from .BaseModel import Model ,Field,FieldType,db
 
 
-class ProductCategory(Model):
+class GroupNbrands(Model):
+    Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    prgrCode =Field(FieldType.INTEGER)
+    brandCode =Field(FieldType.INTEGER)
+    GroupName =Field(FieldType.STRING)
+    BrandName =Field(FieldType.STRING)
+    Grade =Field(FieldType.INTEGER)
+    SalesRank =Field(FieldType.INTEGER)
+    ProfitRank =Field(FieldType.INTEGER)
+    Promoted =Field(FieldType.INTEGER)
+    CloseWatch =Field(FieldType.INTEGER)
+    ClusterCode =Field(FieldType.INTEGER)
+    ProdcutCategoryCode =Field(FieldType.INTEGER)
+    ProductSubCategoryCode =Field(FieldType.INTEGER)
+    ProductGroupCode =Field(FieldType.INTEGER)
+    ProductSubGroupCode =Field(FieldType.INTEGER)
+    ProductBrandCode =Field(FieldType.INTEGER)
+    perGramMax =Field(FieldType.INTEGER)
+    perGramMin =Field(FieldType.INTEGER)
+
+    _table_name = "GroupNbrands"
+
+class productCategory(Model):
+    Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    Name =  Field(FieldType.STRING)
+    refCode =  Field(FieldType.STRING)
+
+    _table_name="productCategory"
+
+class productsubCategory(Model):
+    Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    Name =  Field(FieldType.STRING)
+    Category =  Field(FieldType.STRING)
+    categoryCode =  Field(FieldType.STRING)
+
+    _table_name="productsubCategory"
+
+class productGroups(Model):
+    Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    Name =  Field(FieldType.STRING)
+    Category =  Field(FieldType.STRING)
+    ProductCategoryCode =  Field(FieldType.STRING)
+    convQtyRequired =Field(FieldType.INTEGER)
+    convQtyAtSku =Field(FieldType.INTEGER)
+
+    _table_name="productGroups"
+
+class productSubGroup(Model):
+    Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    Name =  Field(FieldType.STRING)
+    GroupName =  Field(FieldType.STRING)
+    productGroupCode =  Field(FieldType.INTEGER)
+
+    _table_name="productSubGroup"
+
+class LiveSku(Model):
+    code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    SkuName =  Field(FieldType.STRING)
+    Details =  Field(FieldType.STRING)
+    cQty =  Field(FieldType.INTEGER)
+    prgrCode =  Field(FieldType.INTEGER)
+    brandCode =  Field(FieldType.INTEGER)
+    PackingCode =  Field(FieldType.INTEGER)
+    TaxGroupCode =  Field(FieldType.INTEGER)
+    GroupNBrandCode =  Field(FieldType.INTEGER)
+    recentPackUnit =  Field(FieldType.INTEGER)
+    PackUnitRange1 =  Field(FieldType.INTEGER)
+    PackUnitRange2 =  Field(FieldType.INTEGER)
+    uom	 =  Field(FieldType.STRING)
+
+    L1Choice =  Field(FieldType.INTEGER)
+    L2Choice =  Field(FieldType.INTEGER)
+    L3Choice =  Field(FieldType.INTEGER)
+    L4Choice =  Field(FieldType.INTEGER)
+    LowChoice =  Field(FieldType.INTEGER)
+    L1ChoiceQty =  Field(FieldType.INTEGER)
+    L2ChoiceQty =  Field(FieldType.INTEGER)
+    L3ChoiceQty =  Field(FieldType.INTEGER)
+    L4ChoiceQty =  Field(FieldType.INTEGER)
+
+    LowChoiceQty =  Field(FieldType.INTEGER)
+
+    _table_name = "LiveSku"
+
+class LiveSubSKu(Model):
+    code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    SubSkuName =  Field(FieldType.STRING)
+    SkuName =  Field(FieldType.STRING)
+    ConversionQty =  Field(FieldType.INTEGER)
+    skuConvQty =  Field(FieldType.INTEGER)
+    skuCode =  Field(FieldType.INTEGER)
+    MRP =  Field(FieldType.INTEGER)
+    SP1 =  Field(FieldType.INTEGER)
+    SalesPrice2 =  Field(FieldType.INTEGER)
+    SP3 =  Field(FieldType.INTEGER)
+    PLU =  Field(FieldType.INTEGER)
+    ismop =  Field(FieldType.INTEGER)
+
+    HSN =  Field(FieldType.STRING)
+    verified =  Field(FieldType.INTEGER)
+    AutocQty =  Field(FieldType.INTEGER)
+
+
+    _table_name = "LiveSubSku"
+
+class productBrands(Model):
     Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
     Name =  Field(FieldType.STRING)
 
-    _table_name="prca"
+    _table_name = "productBrands"
 
-class ProductGroup(Model):
-    Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+class skuSalesPrevMonth(Model):
+    UbDetailsCode = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    GrossAmt =  Field(FieldType.INTEGER)
+    COGS =  Field(FieldType.INTEGER)
+    Qty =  Field(FieldType.INTEGER)
+    MRPTotal =  Field(FieldType.INTEGER)
+    Discount =  Field(FieldType.INTEGER)
+    GroupNBrandCode =  Field(FieldType.INTEGER)
 
-    Name =  Field(FieldType.STRING)
+    _table_name = "skuSalesPrevMonth"
 
-    _table_name="prgr"
+class skuSalesThisMonth(Model):
+    UbDetailsCode = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    GrossAmt =  Field(FieldType.INTEGER)
+    COGS =  Field(FieldType.INTEGER)
+    Qty =  Field(FieldType.INTEGER)
+    MRPTotal =  Field(FieldType.INTEGER)
+    Discount =  Field(FieldType.INTEGER)
+    GroupNBrandCode =  Field(FieldType.INTEGER)
 
-class ProductBrand(Model):
+    _table_name = "skuSalesThisMonth"
 
-    Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
-
-    Name =  Field(FieldType.STRING)
-
-    _table_name="prbr"
-
-
-class SKU(Model):
-
-    Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
-
-    Name =  Field(FieldType.STRING)
-
-    prgrCode =  Field(FieldType.STRING)
-    BrandCode =  Field(FieldType.STRING)
-    PriceRevisionLimit =  Field(FieldType.STRING)
-    # Name =  Field(FieldType.STRING)
-
-    _table_name="SKU"
-
-class ZeroStockSKU(Model):
-    Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
-
-    SlNo = Field(FieldType.INTEGER)
-
-    SKUCode = Field(FieldType.INTEGER)
-    DOT = Field(FieldType.DATE)
-    PhysicalStock = Field(FieldType.INTEGER)
-    LoginRef = Field(FieldType.STRING)
-
-
-    _table_name="ZeroStockSKU"
-
-
-
-class SalesLoss(Model):
+class SkuStock(Model):
+    ubDetailsCode = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    D7 =  Field(FieldType.INTEGER)
+    D6 =  Field(FieldType.INTEGER)
+    D5 =  Field(FieldType.INTEGER)
+    D4 =  Field(FieldType.INTEGER)
+    D3 =  Field(FieldType.INTEGER)
     
-    Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    D2 =  Field(FieldType.INTEGER)
+    D1 =  Field(FieldType.INTEGER)
+    pwSales =  Field(FieldType.INTEGER)
+    cuWSales =  Field(FieldType.INTEGER)
+    pwSQty =  Field(FieldType.INTEGER)
+    cwSQty =  Field(FieldType.INTEGER)
 
-    SKUCode = Field(FieldType.INTEGER)
-    Reason = Field(FieldType.STRING)
-    DateFrom = Field(FieldType.DATE)
-    DateTo = Field(FieldType.DATE)
-    IsActive = Field(FieldType.INTEGER)
-    LoginRef = Field(FieldType.STRING)
-    ASM = Field(FieldType.INTEGER)
-    ASPD = Field(FieldType.INTEGER)
+    _table_name = "SkuStock"
 
-    _table_name="SalesLoss"
+class StkZeroStockSku(Model):
+    code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+
+    SkuName =  Field(FieldType.STRING)
+    CQTY	 =  Field(FieldType.INTEGER)
+    GroupName =  Field(FieldType.STRING)
+    pwSales =  Field(FieldType.INTEGER)
+    D7 =  Field(FieldType.INTEGER)
+    D6 =  Field(FieldType.INTEGER)
+    D5 =  Field(FieldType.INTEGER)
+    D4 =  Field(FieldType.INTEGER)
+    D3 =  Field(FieldType.INTEGER)
+    D2 =  Field(FieldType.INTEGER)
+    D1 =  Field(FieldType.INTEGER)
+    cuWSales =  Field(FieldType.INTEGER)
+    pwSQty =  Field(FieldType.INTEGER)
+    cwSQty =  Field(FieldType.INTEGER)
+
+    _table_name = "StkZeroStockSku"
+
+class purchasePriceValidation(Model):
+    
+    code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+    PTC =  Field(FieldType.INTEGER)
+    PurchaseDate =  Field(FieldType.STRING)
+    SkuName =  Field(FieldType.STRING)
+    GroupName =  Field(FieldType.STRING)
+    Vendor =  Field(FieldType.STRING)
+    QTY =  Field(FieldType.INTEGER)
+    Rate =  Field(FieldType.INTEGER)
+    InwardRate =  Field(FieldType.INTEGER)
+    previous_rate =  Field(FieldType.INTEGER)
+    Per =  Field(FieldType.INTEGER)
+    previous_dot =  Field(FieldType.STRING)
+    inwardAge =  Field(FieldType.INTEGER)
+    previous_Vendor =  Field(FieldType.INTEGER)
+    dot =  Field(FieldType.DATE)
+
+    _table_name = "purchasePriceValidation"
+
+class SalesPriceValidation(Model):
+    code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
+
+    PTC =  Field(FieldType.INTEGER)
+    SkuName =  Field(FieldType.STRING)
+    ismop =  Field(FieldType.INTEGER)
+    dot =  Field(FieldType.DATE)
+    MRP =  Field(FieldType.INTEGER)
+    SP1 =  Field(FieldType.INTEGER)
+    previous_mrp =  Field(FieldType.INTEGER)
+    previous_SP1 =  Field(FieldType.INTEGER)
+    previous_dot =  Field(FieldType.DATE)
+
+    per =  Field(FieldType.INTEGER)
+    GapDays =  Field(FieldType.INTEGER)
+    GroupName =  Field(FieldType.INTEGER)
+
+    _table_name = "SalesPriceValidation"
 
 
-
-class SKUSales(Model):
-
-    Code = Field(FieldType.INTEGER,is_primary=True,auto_increment=False)
-    SKUCode = Field(FieldType.INTEGER)
-    DOT = Field(FieldType.DATE)
-    qty = Field(FieldType.INTEGER)
-    COGS = Field(FieldType.STRING)
-    GrossAmount = Field(FieldType.STRING)
-
-    _table_name="SKUSales"
 
 
 class Sales(Model):
@@ -240,6 +373,7 @@ class LiveCustomerData(Model):   #last two month customer data
     cumulativeTotal = Field(FieldType.INTEGER)
     cumulativeContribution = Field(FieldType.INTEGER)
     LowSales = Field(FieldType.INTEGER)
+    CustomerLevel =Field(FieldType.INTEGER)
     cumulativeContributionPart = Field(FieldType.INTEGER)
     _table_name = "LiveCustomerData"
 
@@ -265,17 +399,20 @@ class StkZeroStockSku(Model):
 
 
 
+class StkBills(Model):
 
-
-
-
-
-
-
-
-
-
-
-
-
-    
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)
+    CODE = Field(FieldType.INTEGER,)

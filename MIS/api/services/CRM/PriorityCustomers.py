@@ -27,9 +27,14 @@ class PriorityCustomers:
 
 
     @classmethod
-    def count(cls):
+    def get_top_priority_count(cls):
         query = """
-        Select count(*) as priorityCustomers from Customers where BillDaysFrom >0;
+        Select count(*) as priorityCustomers from ActiveCustomers A WHERE ((A.AMOUNT) / 5) > 2000 
+AND A.OCT > 0 
+AND A.NOV > 0 
+AND A.DEC > 0 
+AND A.JAN > 0 
+AND A.FEB > 0;
         """
         result = db.get_data(query=query)
 
@@ -46,6 +51,26 @@ class PriorityCustomers:
         param = [customer_code]
 
         result = db.get_data(query=query,data=param)
+
+        return result
+    
+    @classmethod
+    def get_top_priority_customers(cls):
+        query = """SELECT C.Name, A.*
+FROM ActiveCustomers A
+JOIN Customers C ON A.CardHolderCode = C.Code
+
+WHERE ((A.AMOUNT) / 5) > 2000 
+AND A.OCT > 0 
+AND A.NOV > 0 
+AND A.DEC > 0 
+AND A.JAN > 0 
+AND A.FEB > 0
+Order By A.AMount DESC
+;"""
+    
+
+        result = db.get_data(query=query)
 
         return result
 

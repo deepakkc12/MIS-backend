@@ -44,6 +44,15 @@ class YearlySalesChart(APIView):
 
 
         
+class GetSalsVsOpex(APIView):
+    def get(self,request):
+        result = SalesServices.get_last_2_month_sales_vs_opex()
 
+        return ResponseHandler.success(data=result)
     
     
+class GetSalesTargets(APIView):
+    def get(self,request):
+        result = SalesServices.get_sales_target()
+
+        return ResponseHandler.success(data=result)

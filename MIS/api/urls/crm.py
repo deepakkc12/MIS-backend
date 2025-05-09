@@ -1,7 +1,8 @@
 from django.urls import path
-from ..view.Crm import CRMMatrices,PriorityCustomersList,CustomerDetails,CustomerSalesList,CrmSegmentMetricsData,CustomerRankings,FrequentCustomersList,NonPerformingCustomersList,CustomerVD,CustomerSalesTrend,FrequentVIsitorsList,InactiveCustomersList,CRankings
+from ..view.Crm import CRMMatrices,PriorityCustomersList,CustomerDetails,CustomerSalesList,CrmSegmentMetricsData,CustomerRankings,FrequentCustomersList,NonPerformingCustomersList,CustomerVD,CustomerSalesTrend,FrequentVIsitorsList,InactiveCustomersList,CRankings,LiveCustomerList,GETTOPPriorityCustomers,GEtNewMonthCustomers
 
 urlpatterns = [
+
     path('crm/metrics/', CRMMatrices.as_view(), name='crm-matrices'),
     path('crm/pr-customers-list/', PriorityCustomersList.as_view(), name='priority-customers-list'),
     path('crm/inactive-customers-list/', InactiveCustomersList.as_view(), name='incative-customers-list'),
@@ -14,10 +15,9 @@ urlpatterns = [
     path('crm/npc-list/', NonPerformingCustomersList.as_view(), name='non-performing-visitors-list'),
     path('crm/cvd/', CustomerVD.as_view(), name='customer-value-distribution'),
     path('crm/sales-trend/', CustomerSalesTrend.as_view(), name='customer-sales-trend'),
-
     path('crm/live-levels/', CRankings.as_view(), name='rankings'),
-
-
-
+    path('crm/live-customer-list/', LiveCustomerList.as_view(), name='rankings'),
+    path('crm/top-priors/', GETTOPPriorityCustomers.as_view(), name='rankings'),
+    path('crm/new-month-customers/', GEtNewMonthCustomers.as_view(), name='rankings'),
 
 ]

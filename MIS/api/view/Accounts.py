@@ -5,6 +5,10 @@ from ..services.Accountings.RangeException import AccAuditRange
 from ..services.Accountings.ExpenseAsIncome import ExpenseAsIncome
 from ..utils.response import ResponseHandler
 from ..services.Accountings.BackDatedEntries import BackDatedEntries
+from ..services.Accountings.ROI import ROI
+from ..services.Accountings.TrialBalance import Last2MonthTrailBalance
+
+
 
 
 class GetAccountMatrics(APIView):
@@ -100,6 +104,40 @@ class GetBackDatedEntries(APIView):
         list = BackDatedEntries.list(range=date_range)
 
         return ResponseHandler.success(data=list)
+    
+
+class GetRoiDetails(APIView):
+    def get(Self,request):
+
+        date_range = request.GET.get('range',900)
+
+        list = ROI.get()
+
+        return ResponseHandler.success(data=list)
+    
+class GetPaymentTracks(APIView):
+    def get(self,request):
+
+        type = request.GET.get('type')
+
+        if type == 'recievables':
+            result = Last2MonthTrailBalance.get_recievables_of_last_two_month()
+        elif type == 'payables':
+            result = Last2MonthTrailBalance.get_payables_of_last_two_month()
+        else:
+            result = {'receivables':Last2MonthTrailBalance.get_recievables_of_last_two_month(),'payables':Last2MonthTrailBalance.get_payables_of_last_two_month()}
+        
+        return ResponseHandler.success(data=result)
+    
+class GetOpexList(APIView):
+    def get(self,request):
+        
+        result = Last2MonthTrailBalance.get_opex_list()
+
+        return ResponseHandler.success(data=result)
+
+        
+
 
     
 

@@ -17,7 +17,7 @@ class ManuallyEnteredBArcodes:
     @classmethod
     def count(cls):
 
-        query = """select Count(*) as cnt from POS_Audit_ManualEntryBarcodes"""
+        query = """select Sum(cnt) as cnt from POS_Audit_ManualEntryBarcodes"""
 
         result = db.get_data(query=query)
 
